@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "status": "Pending",
+    "customer": {"name": "Alice"},
+    "tags": ["VIP", "Fast"]
+  },
+  {
+    "id": "2",
+    "status": "Completed",
+    "customer": {"name": "Bob"},
+    "tags": ["VIP"]
+  },
+  {
+    "id": "3",
+    "status": "Pending",
+    "customer": {"name": "Charlie"},
+    "tags": ["Normal"]
+  }
+]
