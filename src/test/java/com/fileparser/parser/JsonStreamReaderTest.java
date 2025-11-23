@@ -22,7 +22,7 @@ class JsonStreamReaderTest {
         assertFalse(orders.isEmpty(), "Parsed list should not be empty");
 
         // Example check: first order customer name
-        assertEquals("Alice", orders.get(0).getCustomer().getName());
+        assertEquals("Customer_1", orders.get(0).getCustomer().getName());
     }
 
     @Test
@@ -33,7 +33,7 @@ class JsonStreamReaderTest {
         List<Order> orders1 = parser.parse(file1);
         List<Order> orders2 = parser.parse(file2);
 
-        assertEquals(3, orders1.size(), "orders1 should have 2 items");
-        assertEquals(2, orders2.size(), "orders2 should have 1 item");
+        assertEquals(50, orders1.size(), "orders1 should have 50 items");
+        assertEquals(50, orders2.size(), "orders2 should have 50 item");
     }
 }

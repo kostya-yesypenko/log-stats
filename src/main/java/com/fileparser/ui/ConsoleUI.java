@@ -1,5 +1,10 @@
 package com.fileparser.ui;
 
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+
+import com.fileparser.model.Order;
 import com.fileparser.model.OrderAttribute;
 import com.fileparser.parser.JsonStreamReader;
 import com.fileparser.parser.OrderJsonParser;
@@ -7,10 +12,6 @@ import com.fileparser.service.StatisticsService;
 import com.fileparser.service.ThreadPoolService;
 import com.fileparser.service.XmlWriterService;
 import com.fileparser.util.FileUtils;
-
-import java.io.File;
-import java.util.List;
-import java.util.Map;
 
 public class ConsoleUI {
 
@@ -25,14 +26,14 @@ public class ConsoleUI {
         String attribute = args[1];
         int threads = args.length >= 3 ? Integer.parseInt(args[2]) : 4;
 
-        OrderAttribute orderAttr = OrderAttribute.valueOf(attribute);
+        OrderAttribute orderAttr = OrderAttribute.valueOf(attribute.toUpperCase());
 
         List<File> files = FileUtils.getJsonFiles(folder);
 
         OrderJsonParser parser = new JsonStreamReader();
         ThreadPoolService executor = new ThreadPoolService(threads);
 
-        List<com.fileparser.model.Order> orders = executor.parseFiles(files, parser);
+        List<Order> orders = executor.parseFiles(files, parser);
 
         StatisticsService statsService = new StatisticsService();
         Map<String, Integer> stats = statsService.calculateStats(orders, orderAttr);

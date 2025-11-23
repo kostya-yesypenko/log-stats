@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fileparser.model.Order;
 
@@ -19,10 +20,10 @@ public class JsonStreamReader implements OrderJsonParser {
 
         try (JsonParser parser = new JsonFactory().createParser(file)) {
             parser.setCodec(mapper);
-            if (parser.nextToken() != com.fasterxml.jackson.core.JsonToken.START_ARRAY) {
+            if (parser.nextToken() != JsonToken.START_ARRAY) {
                 throw new ParserException("File must start with JSON array");
             }
-            while (parser.nextToken() != com.fasterxml.jackson.core.JsonToken.END_ARRAY) {
+            while (parser.nextToken() != JsonToken.END_ARRAY) {
                 Order order = parser.readValueAs(Order.class);
                 result.add(order);
             }
